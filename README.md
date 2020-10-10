@@ -10,9 +10,9 @@
 -  程序应能支持一万道题目的生成。
 -  程序支持对给定的题目文件和答案文件，判定答案中的对错并进行数量统计
 
-## 二、设计实现过程
+## 设计实现过程
 
-### 2.1 数据结构
+###  数据结构
 
 >  使用**二叉树**存放四则运算式,比如1+2×3÷(4-5)+6这个表达式就可以使用以下二叉树表示，中序遍历二叉树时就可以还原四则运算。
 
@@ -22,7 +22,7 @@
 
 ![](https://gitee.com/yuki-r/blog-image/raw/master/img/20201010191615.png)
 
-### 2.2 实现步骤
+###  实现步骤
 
 ![实现步骤](https://gitee.com/yuki-r/blog-image/raw/master/img/20201010200413.png)
 
@@ -30,7 +30,7 @@
 
 > 在主函数`main()`中输入`-n`，`-r`两个参数， 传入并执行`generateMap()`函数，在`generateMap()` 中用for循环`new` `ArithmeticTree`对象，在`ArithmeticTree`的构造器中，计算了四则运算结果，返回一个`OperatorNode`结点，在`generateMap()`函数调用`ArithmeticTree`对象中的值，包括计算出的结果，调用`hashMap.put()`保存在`HashMap`对象中，再传入`writFile()`写出文件。
 
-## 三、代码说明
+## 代码说明
 
 | 类                  | 功能                         |
 | ------------------- | ---------------------------- |
@@ -86,7 +86,7 @@
     }
 ```
 
-## 四、测试运行
+## 测试运行
 
 ![输入](https://gitee.com/yuki-r/blog-image/raw/master/img/20201010201759.png)
 
