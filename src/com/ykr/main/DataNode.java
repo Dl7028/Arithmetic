@@ -1,7 +1,5 @@
 package com.ykr.main;
 
-import com.ykr.utils.Fraction;
-
 
 /**
  * 存放分数数据的节点
@@ -10,7 +8,7 @@ import com.ykr.utils.Fraction;
  */
 public class DataNode {
     //存储当前节点以下的计算结果
-    public Fraction result;
+    public FractionOperation result;
     public DataNode left;
     public DataNode right;
     public int high;
@@ -18,7 +16,7 @@ public class DataNode {
     public DataNode(){
 
     }
-    public DataNode(Fraction result, DataNode left, DataNode right, int high) {
+    public DataNode(FractionOperation result, DataNode left, DataNode right, int high) {
         this.result = result;
         this.left = left;
         this.right = right;
@@ -44,7 +42,7 @@ public class DataNode {
             return false;
         return left != null ? left.equals(node.left) : node.left == null;
     }
-    //疯狂递归
+    //递归
     @Override
     public int hashCode() {
         int result1 = result != null ? result.hashCode() : 0;

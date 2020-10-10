@@ -18,11 +18,12 @@ public class Main {
         int range=0;
         //题目数量
         int number=0;
-        //接收参数
+        //接收参数，输入
+        // -n number -r range
         while (true) {
             Scanner sc = new Scanner(System.in);
             String string = sc.nextLine();
-            args = string.split("\\s+");
+            args = string.split("\\s+"); //去除空格
             //判断参数是否正确
             if (args.length < 2) {
                 System.out.println("请重新输入正确的参数...");
@@ -45,8 +46,8 @@ public class Main {
             }
         }
         //判断是否生成题目,如果不是生成题目，则是对照答案
-        //Myapp.exe -e <exercisefile>.txt -a <answerfile>.txt
-        if(range==0&&number==0){
+        //Myapp.exe -e <Exercisefile>.txt -a <Answerfile>.txt
+        if(range==0&&number==0){       //对照答案
             String answerFileName;
             String execiseFileName;
             if ("-e".equals(args[0])){
@@ -59,12 +60,10 @@ public class Main {
             File answerFile=new File(answerFileName);
             File exerciseFile=new File(execiseFileName);
             FileUtils.compare(answerFile,exerciseFile);
-        }
-
-        else {
+        } else {     //生成四则运算
             HashMap<String, String> map= GenerateUtils.generateMap(number,range);
-            File file=new File("Exercises.txt");
-            File answerFile=new File("answerfile.txt");
+            File file=new File("Exercisefile.txt");
+            File answerFile=new File("Answerfile.txt");
             try {
                 FileWriter fileWriter=new FileWriter(file,true);
                 PrintWriter printWriter=new PrintWriter(fileWriter);

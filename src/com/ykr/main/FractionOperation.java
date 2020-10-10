@@ -1,11 +1,13 @@
-package com.ykr.utils;
+package com.ykr.main;
+
+import com.ykr.utils.GenerateUtils;
 
 /**
  * 分数的四则运算
  * @author Yuki-r
  * @date 2020/10/9 20:23
  */
-public class Fraction {
+public class FractionOperation {
     //分子
     private int a;
     //分母，不能为0，默认为1
@@ -29,7 +31,7 @@ public class Fraction {
      * @param a 分子
      * @param b 分母
      */
-    public Fraction(int a, int b) {
+    public FractionOperation(int a, int b) {
         setAB(a, b);
     }
 
@@ -37,7 +39,7 @@ public class Fraction {
      * 通过表达式得到分子分母
      * @param expression 表达式
      */
-    public Fraction(String expression) {
+    public FractionOperation(String expression) {
         expression.trim();
         int aIndex = expression.indexOf("/");
         int bIndex = expression.indexOf("'");
@@ -63,15 +65,15 @@ public class Fraction {
      * 生成一个计算数
      * @return 随机数
      */
-    public static Fraction generateFraction() {
+    public static FractionOperation generateFraction() {
         //a.b 都是大于等于0的
-        int a = GenerateUtils.getRandomInRange(Expression.range);
-        int b = GenerateUtils.getRandomInRange(Expression.range);
+        int a = GenerateUtils.getRandomInRange(ArithmeticTree.range);
+        int b = GenerateUtils.getRandomInRange(ArithmeticTree.range);
         //分母为0
         while (b == 0) {
-            b = GenerateUtils.getRandomInRange(Expression.range);
+            b = GenerateUtils.getRandomInRange(ArithmeticTree.range);
         }
-        Fraction result = new Fraction(a, b);
+        FractionOperation result = new FractionOperation(a, b);
         return result;
     }
 
@@ -81,9 +83,9 @@ public class Fraction {
      * @param right 右节点分数
      * @return 结果
      */
-    public Fraction add(Fraction right) {
+    public FractionOperation add(FractionOperation right) {
         // a/b+c/d =（ad+bc）/bd
-        return new Fraction(
+        return new FractionOperation(
                 this.a * right.b + this.b * right.a,
                 this.b * right.b
         );
@@ -94,9 +96,9 @@ public class Fraction {
      * @param right 右节点分数
      * @return 结果
      */
-    public Fraction subtract(Fraction right) {
+    public FractionOperation subtract(FractionOperation right) {
         // a/b-c/d =（ad-bc）/bd
-        return new Fraction(
+        return new FractionOperation(
                 this.a * right.b - this.b * right.a,
                 this.b * right.b
         );
@@ -107,9 +109,9 @@ public class Fraction {
      * @param right 右节点分数
      * @return 结果
      */
-    public Fraction multiply(Fraction right) {
+    public FractionOperation multiply(FractionOperation right) {
         // a/b * c/d = ac / bd
-        return new Fraction(
+        return new FractionOperation(
                 this.a * right.a,
                 this.b * right.b
         );
@@ -120,9 +122,9 @@ public class Fraction {
      * @param right 右节点分数
      * @return 结果
      */
-    public Fraction divide(Fraction right) {
+    public FractionOperation divide(FractionOperation right) {
         // a/b  /  c/d = ad / bc
-        return new Fraction(
+        return new FractionOperation(
                 this.a * right.b,
                 this.b * right.a
         );
@@ -203,7 +205,7 @@ public class Fraction {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Fraction fraction = (Fraction) o;
+        FractionOperation fraction = (FractionOperation) o;
         if (a != fraction.a) return false;
         return b == fraction.b;
     }

@@ -1,14 +1,13 @@
-package com.ykr.utils;
+package com.ykr.main;
 
-import com.ykr.main.DataNode;
-import com.ykr.main.OperatorNode;
+import com.ykr.utils.GenerateUtils;
 
 /** 生成四则运算表达式
  * 构建二叉树
  * @author Yuki-r
  * @date 2020/10/9 20:41
  */
-public class Expression {
+public class ArithmeticTree {
     //运算符号
     private static final String ADD = "＋";
 
@@ -51,7 +50,7 @@ public class Expression {
      * @param operatorNumber 运算符数量
      * @param answerRange 生成数的范围
      */
-    public Expression(int operatorNumber, int answerRange) {
+    public ArithmeticTree(int operatorNumber, int answerRange) {
         if (operatorNumber < 1) {
             throw new RuntimeException("运算符个数必须大于0");
         }
@@ -75,7 +74,7 @@ public class Expression {
     public DataNode generateNode(int number) {
         //如果是0就构造叶子节点
         if (number == 0) {
-            return new DataNode(Fraction.generateFraction(), null, null, 1);
+            return new DataNode(FractionOperation.generateFraction(), null, null, 1);
         }
         //其他都是构造符号节点
         OperatorNode parent = new OperatorNode(null, null, OPERATORS[GenerateUtils.getRandomInRange(4)]);
@@ -86,7 +85,7 @@ public class Expression {
         parent.right = generateNode(number - 1 - left);
 
         //然后计算结果
-        Fraction result = calculate(parent.operator, parent.left.result, parent.right.result);
+        FractionOperation result = calculate(parent.operator, parent.left.result, parent.right.result);
         //如果是负数,就是出现小的减去大的情况，这时候交换左右孩子
         if (result.isNegative()) {
             DataNode tmp = parent.left;
@@ -107,7 +106,7 @@ public class Expression {
      * @param rightFraction 右节点分数
      * @return 运算结果
      */
-    private Fraction calculate(String operator, Fraction leftFraction, Fraction rightFraction) {
+    private FractionOperation calculate(String operator, FractionOperation leftFraction, FractionOperation rightFraction) {
         switch (operator) {
             case ADD:
                 return leftFraction.add(rightFraction);

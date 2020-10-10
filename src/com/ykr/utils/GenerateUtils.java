@@ -1,5 +1,7 @@
 package com.ykr.utils;
 
+import com.ykr.main.ArithmeticTree;
+
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -32,7 +34,7 @@ public class GenerateUtils {
 
         for (int i = 1; hashMap.size() < examNumber; ) {
             //因为在运算的过程中会出现n÷0的情况，这时候就会抛异常
-            Expression expression = new Expression(3, answerRange);
+            ArithmeticTree expression = new ArithmeticTree(3, answerRange);
             if ((hashMap.get(expression.toString()) != null || !"".equals(expression.toString()))
                                                              && !expression.isDivideForZero()) {
                 hashMap.put(expression.toString(), expression.getRoot().result.toString());
