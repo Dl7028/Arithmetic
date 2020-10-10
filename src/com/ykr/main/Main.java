@@ -46,7 +46,7 @@ public class Main {
             }
         }
         //判断是否生成题目,如果不是生成题目，则是对照答案
-        //Myapp.exe -e <Exercisefile>.txt -a <Answerfile>.txt
+        //Myapp.exe -e Exercisefile.txt -a Answerfile.txt
         if(range==0&&number==0){       //对照答案
             String answerFileName;
             String execiseFileName;

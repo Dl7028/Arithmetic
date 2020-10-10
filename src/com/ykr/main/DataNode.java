@@ -2,7 +2,7 @@ package com.ykr.main;
 
 
 /**
- * 存放分数数据的节点
+ * 存放计算结果的节点
  * @author Yuki-r
  * @date 2020/10/9 21:08
  */

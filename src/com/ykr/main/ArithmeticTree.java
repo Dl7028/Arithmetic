@@ -22,7 +22,7 @@ public class ArithmeticTree {
     private static final String RIGHT_BRACKETS = ")";
     //运算符数组
     private static final String[] OPERATORS = {ADD, SUBTRACT, MULTIPLY, DIVIDE};
-    //根节点
+    //数据节点
     private DataNode root;
     //生成答案的范围
     public static int range;
@@ -77,25 +77,25 @@ public class ArithmeticTree {
             return new DataNode(FractionOperation.generateFraction(), null, null, 1);
         }
         //其他都是构造符号节点
-        OperatorNode parent = new OperatorNode(null, null, OPERATORS[GenerateUtils.getRandomInRange(4)]);
-        int left = GenerateUtils.getRandomInRange(number);
+        OperatorNode rootNode = new OperatorNode(null, null, OPERATORS[GenerateUtils.getRandomInRange(4)]);
+        int leftNum = GenerateUtils.getRandomInRange(number);
         //递归下去构造左孩子和右孩子
-        parent.left = generateNode(left);
+        rootNode.left = generateNode(leftNum);
         //总数要减去当前已经构建出来的这一个节点
-        parent.right = generateNode(number - 1 - left);
+        rootNode.right = generateNode(number - 1 - leftNum);
 
         //然后计算结果
-        FractionOperation result = calculate(parent.operator, parent.left.result, parent.right.result);
+        FractionOperation result = calculate(rootNode.operator, rootNode.left.result, rootNode.right.result);
         //如果是负数,就是出现小的减去大的情况，这时候交换左右孩子
         if (result.isNegative()) {
-            DataNode tmp = parent.left;
-            parent.left = parent.right;
-            parent.right = tmp;
+            DataNode tmp = rootNode.left;
+            rootNode.left = rootNode.right;
+            rootNode.right = tmp;
         }
-        parent.result = result;
+        rootNode.result = result;
         //计算树高
-        parent.high = Math.max(parent.left.high, parent.right.high) + 1;
-        return parent;
+        rootNode.high = Math.max(rootNode.left.high, rootNode.right.high) + 1;
+        return rootNode;
     }
 
 
