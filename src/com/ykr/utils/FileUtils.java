@@ -21,7 +21,7 @@ public class FileUtils {
         Set<String> titles=map.keySet();
         int i=1;
         for(String title:titles){
-            printWriter.println(i+":"+title);
+            printWriter.println(i+":  "+title);
             i++;
         }
     }
@@ -36,7 +36,7 @@ public class FileUtils {
         int i=1;
         for (String key :answer){
             String value=map.get(key);
-            printWriter.println(i+":"+value);
+            printWriter.println(i+":  "+value);
             i++;
         }
     }

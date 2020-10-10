@@ -21,6 +21,7 @@ public class Main {
         //接收参数，输入
         // -n number -r range
         while (true) {
+            System.out.println("输入 “-n 生成数量 -r 数字范围” ");
             Scanner sc = new Scanner(System.in);
             String string = sc.nextLine();
             args = string.split("\\s+"); //去除空格
@@ -61,9 +62,9 @@ public class Main {
             File exerciseFile=new File(execiseFileName);
             FileUtils.compare(answerFile,exerciseFile);
         } else {     //生成四则运算
-            HashMap<String, String> map= GenerateUtils.generateMap(number,range);
-            File file=new File("Exercisefile.txt");
-            File answerFile=new File("Answerfile.txt");
+            HashMap<String, String> map= GenerateUtils.generateMap(10,10);
+            File file=new File("Exercisefile2.txt");
+            File answerFile=new File("Answerfile2.txt");
             try {
                 FileWriter fileWriter=new FileWriter(file,true);
                 PrintWriter printWriter=new PrintWriter(fileWriter);

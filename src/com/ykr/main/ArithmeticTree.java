@@ -83,17 +83,15 @@ public class ArithmeticTree {
         rootNode.left = generateNode(leftNum);
         //总数要减去当前已经构建出来的这一个节点
         rootNode.right = generateNode(number - 1 - leftNum);
-
-        //然后计算结果
+        //计算结果
         FractionOperation result = calculate(rootNode.operator, rootNode.left.result, rootNode.right.result);
-        //如果是负数,就是出现小的减去大的情况，这时候交换左右孩子
+        //如果是负数,交换左右孩子
         if (result.isNegative()) {
             DataNode tmp = rootNode.left;
             rootNode.left = rootNode.right;
             rootNode.right = tmp;
         }
         rootNode.result = result;
-        //计算树高
         rootNode.high = Math.max(rootNode.left.high, rootNode.right.high) + 1;
         return rootNode;
     }
