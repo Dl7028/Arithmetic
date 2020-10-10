@@ -63,9 +63,15 @@ public class Expression {
         if (operatorNumber == 1) {
             root = generateNode(operatorNumber);
         } else {
-//            root = generateNode(GenerateUtils.getRandomInRange(operatorNumber) + 1);
+            root = generateNode(GenerateUtils.getRandomInRange(operatorNumber) + 1);
         }
     }
+
+    /**
+     * 构建生成四则运算表达式的二叉树
+     * @param number 运算符数量
+     * @return 二叉树头节点
+     */
     public DataNode generateNode(int number) {
         //如果是0就构造叶子节点
         if (number == 0) {
@@ -120,4 +126,58 @@ public class Expression {
                 throw new RuntimeException("该操作符不存在");
         }
     }
+
+
+
+
+
+
+    /**
+     * 中序遍历二叉树
+     * @param localRootNode 当前所在的最高节点
+     * @return 字符串
+     */
+    private String print(DataNode localRootNode) {
+
+        if (localRootNode == null) {
+            return "";
+        }
+        String left = print(localRootNode.left);
+        String mid = localRootNode.toString();
+        //需要加括号的情况,一个节点的操作符为乘除，其子节点的操作符是加减
+        if (localRootNode.left instanceof OperatorNode && localRootNode instanceof OperatorNode) {
+            if (leftBrackets(((OperatorNode) localRootNode.left).operator, ((OperatorNode) localRootNode).operator)) {
+                left = LEFT_BRACKETS + " " + left + " " + RIGHT_BRACKETS;
+            }
+        }
+        String right = print(localRootNode.right);
+        if (localRootNode.right instanceof OperatorNode && localRootNode instanceof OperatorNode) {
+            if (rightBrackets(((OperatorNode) localRootNode.right).operator, ((OperatorNode) localRootNode).operator)) {
+                right = LEFT_BRACKETS + " " + right + " " + RIGHT_BRACKETS;
+            }
+        }
+        return left + mid + right;
+    }
+
+
+    private boolean leftBrackets(String left, String mid) {
+        return (isAddOrSubtract(left) && isMultiplyOrDivide(mid));
+    }
+    //向右遍历时，需要括号
+    private boolean rightBrackets(String right, String mid) {
+        //有可能出现2*3 /( 4*5 )的情况，所以不用加括号只有当
+        return !(isAddOrSubtract(mid) && isMultiplyOrDivide(right));
+    }
+    private boolean isAddOrSubtract(String operator) {
+        return operator.equals(ADD) || operator.equals(SUBTRACT);
+    }
+    private boolean isMultiplyOrDivide(String operator) {
+        return operator.equals(MULTIPLY) || operator.equals(DIVIDE);
+    }
+    //打印出中缀表达式，包括括号
+    @Override
+    public String toString() {
+        return print(root);
+    }
+
 }
