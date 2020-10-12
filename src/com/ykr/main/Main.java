@@ -46,22 +46,7 @@ public class Main {
                 break;
             }
         }
-        //判断是否生成题目,如果不是生成题目，则是对照答案
-        //Myapp.exe -e Exercisefile.txt -a Answerfile.txt
-        if(range==0&&number==0){       //对照答案
-            String answerFileName;
-            String execiseFileName;
-            if ("-e".equals(args[0])){
-                execiseFileName=args[1];
-                answerFileName=args[3];
-            }else {
-                execiseFileName=args[3];
-                answerFileName=args[1];
-            }
-            File answerFile=new File(answerFileName);
-            File exerciseFile=new File(execiseFileName);
-            FileUtils.compare(answerFile,exerciseFile);
-        } else {     //生成四则运算
+            //生成四则运算
             HashMap<String, String> map= GenerateUtils.generateMap(10,10);
             File file=new File("Exercisefile2.txt");
             File answerFile=new File("Answerfile2.txt");
@@ -88,7 +73,7 @@ public class Main {
                 e.printStackTrace();
             }
 
-        }
+        
 
     }
 }
